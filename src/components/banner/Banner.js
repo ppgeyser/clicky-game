@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./styles.css";
+import "./styles.css";
 
 function Banner(props) {
     return (
-        <nav class="navbar sticky-top navbar-light bg-light">
-            <p>Banner</p>
+        <nav class="navbar navbar-dark">
+            Banner
         </nav>
     )
 };
