@@ -13,6 +13,10 @@ class GameContainer extends Component {
         drivers
     };
 
+    handleOnClick = id => {
+        alert("I've been clicked!");
+    }
+
     render() {
         return (
             <div>
@@ -23,6 +27,7 @@ class GameContainer extends Component {
                 <CardColumns>
                     {this.state.drivers.map(driver => (
                         <Cards
+                            handleOnClick={this.handleOnClick}
                             id={driver.id}
                             key={driver.id}
                             image={driver.image}
