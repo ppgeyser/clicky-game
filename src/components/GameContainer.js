@@ -10,42 +10,60 @@ class GameContainer extends Component {
     state = {
         wins: 0,
         score: 0,
+
+        //Default message on page load
         jumbotronMessage: "Formula 1 Clicky Game",
+        
+        // Pulled from drivers.json
         drivers
     };
 
     shuffleArray = () => {
+        // Grab current state of drivers array
         let driversArray = this.state.drivers;
+
+        //Durstenfeld Shuffle (https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm)
         for (let i = driversArray.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [driversArray[i], driversArray[j]] = [driversArray[j], driversArray[i]];
         };
+
+        // Set shuffled drivers array as new state
         this.setState({
             drivers: driversArray
         })
     };
 
     resetDriverClick = () => {
+        //grab current state of drivers array
         let driversArray = this.state.drivers;
-            driversArray.forEach(d => {
-                d.clicked = false;
-            })
+
+        //set click = false for each driver
+        driversArray.forEach(d => {
+            d.clicked = false;
+        })
+
+        //set driversArray to be new state
         this.setState({
             drivers: driversArray
         })
     };
 
     handleOnClick = id => {
+
+        //find referenced driver in drivers array by id
         let driver = this.state.drivers.find(d => {
             return d.id === id;
         });
 
+        //if driver hasn't been clicked, change jumbotronMessage and increment score
         if (!driver.clicked) {
             driver.clicked = true;
             this.setState({
                 score: this.state.score + 1,
                 jumbotronMessage: "Correct!"
             });
+            //if driver has been clicked, change jumbotronMessage and decrement score
         } else {
             this.resetDriverClick();
             this.setState({
@@ -54,14 +72,19 @@ class GameContainer extends Component {
             })
         };
 
+        //shuffle array
         this.shuffleArray();
     };
 
+    // shuffle array on page load
     componentDidMount() {
         this.shuffleArray();
     };
 
+    //check to see if score = 20 on component update
     componentDidUpdate() {
+
+        //if score is 20, reset driver click, change jumbotron message, reset score, increment wins
         if (this.state.score === 20) {
             this.resetDriverClick();
             this.setState({
