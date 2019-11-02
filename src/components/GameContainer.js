@@ -25,7 +25,21 @@ class GameContainer extends Component {
     };
 
     handleOnClick = id => {
-        alert("I've been clicked!");
+        let driver = this.state.drivers.find(d => {
+            return d.id === id;
+        });
+
+        if (!driver.clicked) {
+            driver.clicked = true;
+            this.setState({
+                score: this.state.score + 1
+            });
+        } else {
+            this.setState({
+                score: 0
+            })
+        };
+
         this.shuffleArray();
     };
 
