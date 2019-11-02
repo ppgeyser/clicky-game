@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import drivers from "../drivers.json";
 import Banner from "./banner/Banner.js";
 import Jumbotron from "./jumbotron/Jumbotron.js";
+import CardColumns from "./cardColumns/CardColumns.js";
 import Cards from "./cards/Cards.js";
 import Footer from "./footer/Footer.js";
 
@@ -19,7 +20,16 @@ class GameContainer extends Component {
                 wins={this.state.wins}
                 score={this.state.score} />
                 <Jumbotron />
-                <Cards />
+                <CardColumns>
+                    {this.state.drivers.map(driver => (
+                        <Cards
+                            id={driver.id}
+                            key={driver.id}
+                            image={driver.image}
+                            driverName={driver.driverName}
+                        ></Cards>
+                    ))}
+                </CardColumns>
                 <Footer />
             </div>
         )
