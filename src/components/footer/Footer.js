@@ -3,7 +3,7 @@ import "./styles.css";
 
 function Footer() {
     return (
-        <nav class="navbar sticky-bottom">
+        <nav className="navbar sticky-bottom">
             Formula 1 Clicky Game
         </nav>
     )

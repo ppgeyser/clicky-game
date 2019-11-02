@@ -13,9 +13,21 @@ class GameContainer extends Component {
         drivers
     };
 
+    shuffleArray = array => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        };
+    };
+
     handleOnClick = id => {
         alert("I've been clicked!");
-    }
+    };
+
+    componentDidMount() {
+        let shuffledArray = this.shuffleArray(this.state.drivers);
+        console.log("Shuffled", shuffledArray);
+    };
 
     render() {
         return (
