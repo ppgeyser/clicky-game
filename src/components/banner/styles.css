@@ -6,3 +6,7 @@ li {
     font-weight: bold;
     font-size: 40px;
 }
+#f1_logo {
+    max-width: 125px;
+    padding-bottom: 10px;
+}
