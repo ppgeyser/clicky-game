@@ -10,6 +10,7 @@ class GameContainer extends Component {
     state = {
         wins: 0,
         score: 0,
+        jumbotronMessage: "Formula 1 Clicky Game",
         drivers
     };
 
@@ -24,6 +25,16 @@ class GameContainer extends Component {
         })
     };
 
+    resetDriverClick = () => {
+        let driversArray = this.state.drivers;
+            driversArray.forEach(d => {
+                d.clicked = false;
+            })
+        this.setState({
+            drivers: driversArray
+        })
+    };
+
     handleOnClick = id => {
         let driver = this.state.drivers.find(d => {
             return d.id === id;
@@ -32,16 +43,14 @@ class GameContainer extends Component {
         if (!driver.clicked) {
             driver.clicked = true;
             this.setState({
-                score: this.state.score + 1
+                score: this.state.score + 1,
+                jumbotronMessage: "Correct!"
             });
         } else {
-            let driversArray = this.state.drivers;
-            driversArray.forEach(d => {
-                d.clicked = false;
-            })
+            this.resetDriverClick();
             this.setState({
                 score: 0,
-                drivers: driversArray
+                jumbotronMessage: "Incorrect!",
             })
         };
 
@@ -50,7 +59,18 @@ class GameContainer extends Component {
 
     componentDidMount() {
         this.shuffleArray();
-    }
+    };
+
+    componentDidUpdate() {
+        if (this.state.score === 20) {
+            this.resetDriverClick();
+            this.setState({
+                jumbotronMessage: "You won!",
+                wins: this.state.wins + 1,
+                score: 0
+            })
+        }
+    };
 
     render() {
         return (
@@ -58,7 +78,9 @@ class GameContainer extends Component {
                 <Banner
                 wins={this.state.wins}
                 score={this.state.score} />
-                <Jumbotron />
+                <Jumbotron 
+                jumbotronMessage={this.state.jumbotronMessage}
+                />
                 <CardColumns>
                     {this.state.drivers.map(driver => (
                         <Cards
