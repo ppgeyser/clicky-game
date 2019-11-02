@@ -14,7 +14,7 @@ class GameContainer extends Component {
     };
 
     shuffleArray = () => {
-        let driversArray = this.state.drivers
+        let driversArray = this.state.drivers;
         for (let i = driversArray.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [driversArray[i], driversArray[j]] = [driversArray[j], driversArray[i]];
@@ -35,8 +35,13 @@ class GameContainer extends Component {
                 score: this.state.score + 1
             });
         } else {
+            let driversArray = this.state.drivers;
+            driversArray.forEach(d => {
+                d.clicked = false;
+            })
             this.setState({
-                score: 0
+                score: 0,
+                drivers: driversArray
             })
         };
 
