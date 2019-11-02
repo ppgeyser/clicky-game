@@ -3,7 +3,7 @@ import "./styles.css";
 
 function Cards(props) {
     return (
-        <div class="col-3 my-2">
+        <div class="col-3 my-3">
             <img src={props.image} class="card-img-top" alt={props.driverName} onClick={() => props.handleOnClick(props.id)} />
         </div>
     )
