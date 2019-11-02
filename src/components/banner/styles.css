@@ -1,3 +1,8 @@
-.navbar {
-    background-color: #e10600
+.nav {
+    background-color: #e10600;
+}
+li {
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
 }
