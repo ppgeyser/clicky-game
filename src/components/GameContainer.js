@@ -12,7 +12,7 @@ class GameContainer extends Component {
         score: 0,
 
         //Default message on page load
-        jumbotronMessage: "Formula 1 Clicky Game",
+        bannerMessage: "Click any driver to start!",
         
         // Pulled from drivers.json
         drivers
@@ -56,19 +56,19 @@ class GameContainer extends Component {
             return d.id === id;
         });
 
-        //if driver hasn't been clicked, change jumbotronMessage and increment score
+        //if driver hasn't been clicked, change bannerMessage and increment score
         if (!driver.clicked) {
             driver.clicked = true;
             this.setState({
                 score: this.state.score + 1,
-                jumbotronMessage: "Correct!"
+                bannerMessage: "Correct!"
             });
-            //if driver has been clicked, change jumbotronMessage and decrement score
+            //if driver has been clicked, change bannerMessage and decrement score
         } else {
             this.resetDriverClick();
             this.setState({
                 score: 0,
-                jumbotronMessage: "Incorrect!",
+                bannerMessage: "Incorrect!",
             })
         };
 
@@ -88,7 +88,7 @@ class GameContainer extends Component {
         if (this.state.score === 20) {
             this.resetDriverClick();
             this.setState({
-                jumbotronMessage: "You won!",
+                bannerMessage: "You won!",
                 wins: this.state.wins + 1,
                 score: 0
             })
@@ -100,10 +100,9 @@ class GameContainer extends Component {
             <div>
                 <Banner
                 wins={this.state.wins}
+                bannerMessage={this.state.bannerMessage}
                 score={this.state.score} />
-                <Jumbotron 
-                jumbotronMessage={this.state.jumbotronMessage}
-                />
+                <Jumbotron/>
                 <CardColumns>
                     {this.state.drivers.map(driver => (
                         <Cards
